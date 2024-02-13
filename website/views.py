@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, jsonify
-from flask_login import login_required, current_user
+from flask_login import current_user
 from .models import Review
 from . import db
 import json
@@ -8,7 +8,6 @@ views = Blueprint('views', __name__)
 
 
 @views.route('/', methods=['GET', 'POST'])
-@login_required
 def home():
     if request.method == 'POST': 
         review = request.form.get('review')#Gets the note from the HTML 
@@ -26,12 +25,12 @@ def home():
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
-    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    noteId = note['noteId']
-    review = Review.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
+    review = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    reviewId = review['reviewId']
+    review = Review.query.get(reviewId)
+    if review:
+        if review.user_id == current_user.id:
+            db.session.delete(review)
             db.session.commit()
 
     return jsonify({})
