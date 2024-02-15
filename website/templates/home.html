@@ -4,8 +4,30 @@
     <style>
       body {
         text-align: center;
-        background-color: #ffffff; /* Set the desired background color */
+        background-color: #ffffff;
       }
+
+  .page-header {
+    background-image: url("images/hero.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .page-header p {
+    font-size: 18px;
+  }
     
       h1, h2 {
         text-align: center;
@@ -36,6 +58,10 @@
       }
     </style>
 
+  <header class="page-header">
+    
+  </header>
+  
     <h1 align="center">Welcome to the Review Page</h1>
     <ul class="list-group list-group-flush" id="reviews">
       <h2>Recent Reviews</h2>
