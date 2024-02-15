@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Review Landing Page</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    section {
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    #existing-reviews {
+      background-color: #f9f9f9;
+    }
+
+    #reviews {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .review-card {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px;
+      width: 300px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-card p {
+      margin: 0;
+    }
+
+    #new-review form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    #new-review label {
+      font-weight: bold;
+    }
+
+    #new-review textarea {
+      height: 100px;
+    }
+
+    #new-review button[type="submit"] {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #new-review button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to the Review Page</h1>
+  </header>
+  
+  <section id="existing-reviews">
+    <h2>Recent Reviews</h2>
+    <div id="reviews">
+      <!-- Display existing reviews here dynamically using JavaScript -->
+    </div>
+  </section>
+
+  <section id="new-review">
+    <h2>Add a New Review</h2>
+    <form id="review-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="rating">Rating:</label>
+      <select id="rating" name="rating" required>
+        <option value="">Select a rating</option>
+        <option value="5">5 -> Excellent</option>
+        <option value="4">4 -> Good</option>
+        <option value="3">3 -> Average</option>
+        <option value="2">2 -> Below Average</option>
+        <option value="1">1 -> Poor</option>
+      </select>
+
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" placeholder="Write your review..." required></textarea>
+
+      <button type="submit">Submit Review</button>
+    </form>
+  </section>
+
+  <script>
+    // Function to fetch existing reviews from an API or database
+    function fetchReviews() {
+      // Use an API call or database query to fetch reviews
+      // Update the "reviews" div with the fetched reviews dynamically
+    }
+
+    // Function to add a new review
+    function addReview(event) {
+      event.preventDefault();
+      // Retrieve the form data
+      const name = document.getElementById('name').value;
+      const rating = document.getElementById('rating').value;
+      const comment = document.getElementById('comment').value;
+
+      // Perform validation if needed
+
+      // Submit the review to an API or database
+      // Display a success message or handle errors
+    }
+
+    // Event listener for form submission
+    const reviewForm = document.getElementById('review-form');
+    reviewForm.addEventListener('submit', addReview);
+
+    // Fetch existing reviews when the page loads
+    fetchReviews();
+  </script>
+</body>
+</html>
+
+
+
+===============================================================================================================================================
+
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<style>
+  body {
+    text-align: center;
+    background-color: #f0f0f0; /* Set the desired background color */
+  }
+
+  h1, h2 {
+    text-align: center;
+  }
+
+  #new-review {
+    margin: 0 auto;
+    width: 50%; /* Adjust the width as per your preference */
+    text-align: left;
+    background-color: #ffffff; /* Set the desired background color */
+    padding: 20px;
+  }
+
+  #new-review label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  #new-review input, #new-review select, #new-review textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  #new-review button {
+    margin-top: 10px;
+  }
+</style>
+
+<h1>Welcome to the Review Page</h1>
+<ul class="list-group list-group-flush" id="reviews">
+  <h2>Recent Reviews</h2>
+  {% for review in user.reviews %}
+  <li class="list-group-item">
+    {{ review.data }}
+    <button type="button" class="close" onClick="deleteReview({ review,id })">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+
+<section id="new-review">
+  <h2>Add a New Review</h2>
+  <form id="review-form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br />
+
+    <label for="rating">Rating:</label>
+    <select id="rating" name="rating" required>
+      <option value="">Select a rating</option>
+      <option value="5">5 -> Excellent</option>
+      <option value="4">4 -> Good</option>
+      <option value="3">3 -> Average</option>
+      <option value="2">2 -> Below Average</option>
+      <option value="1">1 -> Poor</option>
+    </select>
+    <br />
+
+    <label for="review">Comment:</label>
+    <textarea name="review" id="review" class="form-control" placeholder="Write your review..." required></textarea>
+    <br />
+
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Submit Review</button>
+    </div>
+  </form>
+</section>
+
+<script>
+  // Function to fetch existing reviews from an API or database
+  function fetchReviews() {
+    // Use an API call or database query to fetch reviews
+    // Update the "reviews" div with the fetched reviews dynamically
+  }
+
+  // Function to add a new review
+  function addReview(event) {
+    event.preventDefault();
+    // Retrieve the form data
+    const name = document.getElementById('name').value;
+    const rating = document.getElementById('rating').value;
+    const comment = document.getElementById('comment').value;
+
+    // Perform validation if needed
+
+    // Submit the review to an API or database
+    // Display a success message or handle errors
+  }
+
+  // Event listener for form submission
+  const reviewForm = document.getElementById('review-form');
+  reviewForm.addEventListener('submit', addReview);
+
+  // Fetch existing reviews when the page loads
+  fetchReviews();
+</script>
+
+{% endblock %}

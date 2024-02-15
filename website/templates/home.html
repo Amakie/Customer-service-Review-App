@@ -1,7 +1,44 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
     %}
-    <h1 align="center">Add a New Review</h1>
+
+    <style>
+      body {
+        text-align: center;
+        background-color: #ffffff; /* Set the desired background color */
+      }
+    
+      h1, h2 {
+        text-align: center;
+      }
+    
+      #new-review {
+        margin: 0 auto;
+        width: 50%; /* Adjust the width as per your preference */
+        text-align: left;
+        background-color: #42005c; /* Set the desired background color */
+        padding: 20px;
+        color: #ffffff; /* Text color */
+      }
+    
+      #new-review label {
+        display: block;
+        margin-bottom: 10px;
+      }
+    
+      #new-review input, #new-review select, #new-review textarea {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+    
+      #new-review button {
+        margin-top: 10px;
+      }
+    </style>
+
+    <h1 align="center">Welcome to the Review Page</h1>
     <ul class="list-group list-group-flush" id="reviews">
+      <h2>Recent Reviews</h2>
       {% for review in user.reviews %}
       <li class="list-group-item">
         {{ review.data }}
@@ -12,6 +49,7 @@
       {% endfor %}
     </ul>
     <form method="POST">
+    <!--
         <h4>Add Company Name</h4>
         <textarea name="company_name" id="company_name" class="form-control"></textarea>
         <br />
@@ -20,6 +58,68 @@
       <br />
       <div align="center">
         <button type="submit" class="btn btn-primary">Add Review</button>
-      </div>
+      </div> 
+      Previous form ends here -->
+
+      <!--New form begins here -->
+    
+      <section id="new-review">
+        <h2>Add a New Review</h2>
+        <form id="review-form">
+          <label for="name">Company Name:</label>
+          <input type="text" id="name" name="name" required>
+          <br />
+
+          <label for="rating">Rate Experience:</label>
+          <select id="rating" name="rating" required>
+            <option value="">Select a rating</option>
+            <option value="5">5. Excellent</option>
+            <option value="4">4. Good</option>
+            <option value="3">3. Average</option>
+            <option value="2">2. Below Average</option>
+            <option value="1">1. Poor</option>
+          </select>
+          <br />
+
+          <label for="review">Your Review:</label>
+          <textarea name="review" id="review" class="form-control" placeholder="Write your review..." required></textarea>
+          <br />
+
+          <div align="center">
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+          </div> 
+        </form>
+      </section>
+    
+      <!--
+      <script>
+        // Function to fetch existing reviews from an API or database
+        function fetchReviews() {
+          // Use an API call or database query to fetch reviews
+          // Update the "reviews" div with the fetched reviews dynamically
+        }
+    
+        // Function to add a new review
+        function addReview(event) {
+          event.preventDefault();
+          // Retrieve the form data
+          const name = document.getElementById('name').value;
+          const rating = document.getElementById('rating').value;
+          const comment = document.getElementById('comment').value;
+    
+          // Perform validation if needed
+    
+          // Submit the review to an API or database
+          // Display a success message or handle errors
+        }
+    
+        // Event listener for form submission
+        const reviewForm = document.getElementById('review-form');
+        reviewForm.addEventListener('submit', addReview);
+    
+        // Fetch existing reviews when the page loads
+        fetchReviews();
+      </script>
+      -->
     </form>
     {% endblock %}
