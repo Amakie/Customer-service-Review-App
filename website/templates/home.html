@@ -4,19 +4,20 @@
     <style>
       body {
         text-align: center;
-        background-color: #ffffff;
+        background-color: #ccbbd5;
       }
 
   .page-header {
-    background-image: url("images/hero.jpg");
+    background-image: url("https://raw.githubusercontent.com/Amakie/Customer-service-Review-App/main/website/images/hero.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 300px;
+    height: 100vh;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: rgb(255, 255, 255);
     text-align: center;
   }
 
@@ -59,21 +60,11 @@
     </style>
 
   <header class="page-header">
-    
+
   </header>
   
     <h1 align="center">Welcome to the Review Page</h1>
-    <ul class="list-group list-group-flush" id="reviews">
-      <h2>Recent Reviews</h2>
-      {% for review in user.reviews %}
-      <li class="list-group-item">
-        {{ review.data }}
-        <button type="button" class="close" onClick="deleteReview({ review,id })">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
+
     <form method="POST">
     <!--
         <h4>Add Company Name</h4>
@@ -116,6 +107,17 @@
           </div> 
         </form>
       </section>
+
+      <ul class="list-group list-group-flush" id="reviews">
+        <h2>Recent Reviews</h2>
+        {% for review in user.reviews %}
+        <li class="list-group-item">
+          {{ review.data }}
+          <button type="button" class="close" onClick="deleteReview({ review,id })">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </li>
+        {% endfor %}
     
       <!--
       <script>
